@@ -1,25 +1,25 @@
 /*
  * ============================================
- * BrickShop - Styles CSS
+ * BrickShop - CSS Styles
  * ============================================
- * Palette de couleurs LEGO :
- * - Rouge LEGO : #E3000B
- * - Jaune LEGO : #FFD500
- * - Blanc : #FFFFFF
- * - Gris clair : #F5F5F5
- * - Gris foncé : #333333
+ * LEGO Color Palette:
+ * - LEGO Red: #E3000B
+ * - LEGO Yellow: #FFD500
+ * - White: #FFFFFF
+ * - Light Gray: #F5F5F5
+ * - Dark Gray: #333333
  *
- * Pour modifier les couleurs principales,
- * changez les variables CSS ci-dessous.
+ * To change the main colors,
+ * edit the CSS variables below.
  * ============================================
  */
 
-/* ========== VARIABLES CSS ========== */
+/* ========== CSS VARIABLES ========== */
 :root {
-    /* Couleurs principales - Modifiez ici pour changer le thème */
-    --color-primary: #E3000B;       /* Rouge LEGO */
-    --color-secondary: #FFD500;     /* Jaune LEGO */
-    --color-accent: #0055BF;        /* Bleu LEGO */
+    /* Main colors - Edit here to change the theme */
+    --color-primary: #E3000B;       /* LEGO Red */
+    --color-secondary: #FFD500;     /* LEGO Yellow */
+    --color-accent: #0055BF;        /* LEGO Blue */
     --color-white: #FFFFFF;
     --color-light: #F5F5F5;
     --color-gray: #E0E0E0;
@@ -27,10 +27,10 @@
     --color-text: #444444;
     --color-whatsapp: #25D366;
 
-    /* Typographie */
+    /* Typography */
     --font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
 
-    /* Espacements */
+    /* Spacing */
     --spacing-xs: 0.5rem;
     --spacing-sm: 1rem;
     --spacing-md: 1.5rem;
@@ -38,7 +38,7 @@
     --spacing-xl: 3rem;
     --spacing-xxl: 5rem;
 
-    /* Bordures et ombres */
+    /* Borders and shadows */
     --border-radius: 12px;
     --border-radius-sm: 8px;
     --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
@@ -96,7 +96,7 @@ ul {
     padding: 0 var(--spacing-md);
 }
 
-/* ========== BOUTONS ========== */
+/* ========== BUTTONS ========== */
 .btn {
     display: inline-flex;
     align-items: center;
@@ -219,7 +219,7 @@ ul {
     width: 100%;
 }
 
-/* Menu hamburger (mobile) */
+/* Hamburger menu (mobile) */
 .menu-toggle {
     display: none;
     flex-direction: column;
@@ -271,7 +271,7 @@ ul {
     max-width: 500px;
 }
 
-/* Décorations briques */
+/* Brick decorations */
 .hero-decoration {
     position: absolute;
     top: 0;
@@ -314,7 +314,7 @@ ul {
     transform: rotate(25deg);
 }
 
-/* ========== SECTIONS COMMUNES ========== */
+/* ========== COMMON SECTIONS ========== */
 .section-title {
     font-size: clamp(2rem, 4vw, 2.75rem);
     font-weight: 700;
@@ -349,7 +349,7 @@ ul {
     overflow: hidden;
     box-shadow: var(--shadow-sm);
     transition: all var(--transition-normal);
-    /* Pour l'animation d'apparition */
+    /* For fade-in animation */
     opacity: 0;
     transform: translateY(30px);
 }
@@ -368,6 +368,7 @@ ul {
     position: relative;
     height: 220px;
     overflow: hidden;
+    background-color: var(--color-light);
 }
 
 .product-image img {
@@ -561,7 +562,7 @@ ul {
     margin-bottom: 0.25rem;
 }
 
-/* ========== BOUTON WHATSAPP FLOTTANT ========== */
+/* ========== FLOATING WHATSAPP BUTTON ========== */
 .whatsapp-float {
     position: fixed;
     bottom: 25px;
@@ -589,7 +590,7 @@ ul {
     box-shadow: 0 6px 30px rgba(37, 211, 102, 0.5);
 }
 
-/* Animation pulse */
+/* Pulse animation */
 .whatsapp-float::before {
     content: '';
     position: absolute;
@@ -614,7 +615,7 @@ ul {
 
 /* ========== RESPONSIVE ========== */
 
-/* Tablette */
+/* Tablet */
 @media (max-width: 992px) {
     .hero-content {
         max-width: 100%;
@@ -717,7 +718,7 @@ ul {
     }
 }
 
-/* Petit mobile */
+/* Small mobile */
 @media (max-width: 480px) {
     .container {
         padding: 0 var(--spacing-sm);

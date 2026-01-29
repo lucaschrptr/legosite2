@@ -2,26 +2,26 @@
  * ============================================
  * BrickShop - JavaScript
  * ============================================
- * Ce fichier contient :
- * - Navigation mobile (menu hamburger)
- * - Scroll fluide vers les sections
- * - Animation d'apparition des cartes produits
- * - Effets au scroll sur le header
+ * This file contains:
+ * - Mobile navigation (hamburger menu)
+ * - Smooth scrolling to sections
+ * - Product cards fade-in animation
+ * - Header scroll effects
  * ============================================
  */
 
 document.addEventListener('DOMContentLoaded', function () {
 
-    // ========== ÉLÉMENTS DOM ==========
+    // ========== DOM ELEMENTS ==========
     const header = document.querySelector('.header');
     const menuToggle = document.querySelector('.menu-toggle');
     const navList = document.querySelector('.nav-list');
     const navLinks = document.querySelectorAll('.nav-link');
     const productCards = document.querySelectorAll('.product-card');
 
-    // ========== MENU MOBILE ==========
+    // ========== MOBILE MENU ==========
     /**
-     * Gestion du menu hamburger pour mobile
+     * Hamburger menu toggle for mobile
      */
     if (menuToggle && navList) {
         menuToggle.addEventListener('click', function () {
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
             navList.classList.toggle('active');
         });
 
-        // Fermer le menu quand on clique sur un lien
+        // Close menu when clicking a link
         navLinks.forEach(function (link) {
             link.addEventListener('click', function () {
                 menuToggle.classList.remove('active');
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
 
-        // Fermer le menu si on clique en dehors
+        // Close menu when clicking outside
         document.addEventListener('click', function (e) {
             if (!menuToggle.contains(e.target) && !navList.contains(e.target)) {
                 menuToggle.classList.remove('active');
@@ -46,10 +46,10 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // ========== SCROLL FLUIDE ==========
+    // ========== SMOOTH SCROLLING ==========
     /**
-     * Active le scroll fluide vers les sections
-     * quand on clique sur les liens de navigation
+     * Enable smooth scrolling to sections
+     * when clicking navigation links
      */
     document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
         anchor.addEventListener('click', function (e) {
@@ -71,21 +71,21 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // ========== ANIMATION DES CARTES PRODUITS ==========
+    // ========== PRODUCT CARDS ANIMATION ==========
     /**
-     * Intersection Observer pour animer les cartes
-     * quand elles entrent dans le viewport
+     * Intersection Observer to animate cards
+     * when they enter the viewport
      */
     const observerOptions = {
         root: null,
         rootMargin: '0px',
-        threshold: 0.15 // Déclenche quand 15% de la carte est visible
+        threshold: 0.15 // Triggers when 15% of the card is visible
     };
 
     const cardObserver = new IntersectionObserver(function (entries, observer) {
         entries.forEach(function (entry, index) {
             if (entry.isIntersecting) {
-                // Ajouter un délai progressif pour chaque carte
+                // Add progressive delay for each card
                 const card = entry.target;
                 const delay = Array.from(productCards).indexOf(card) * 100;
 
@@ -93,20 +93,20 @@ document.addEventListener('DOMContentLoaded', function () {
                     card.classList.add('visible');
                 }, delay);
 
-                // Ne plus observer cette carte
+                // Stop observing this card
                 observer.unobserve(card);
             }
         });
     }, observerOptions);
 
-    // Observer toutes les cartes produits
+    // Observe all product cards
     productCards.forEach(function (card) {
         cardObserver.observe(card);
     });
 
-    // ========== EFFET HEADER AU SCROLL ==========
+    // ========== HEADER SCROLL EFFECT ==========
     /**
-     * Change l'apparence du header quand on scroll
+     * Changes header appearance on scroll
      */
     let lastScrollY = window.scrollY;
 
@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const currentScrollY = window.scrollY;
 
         if (header) {
-            // Ajouter une ombre plus prononcée après un certain scroll
+            // Add stronger shadow after certain scroll
             if (currentScrollY > 50) {
                 header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
             } else {
@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', function () {
         lastScrollY = currentScrollY;
     }
 
-    // Écouter l'événement scroll avec throttle pour les performances
+    // Listen to scroll event with throttle for performance
     let scrollTimeout;
     window.addEventListener('scroll', function () {
         if (scrollTimeout) {
@@ -134,9 +134,9 @@ document.addEventListener('DOMContentLoaded', function () {
         scrollTimeout = window.requestAnimationFrame(handleHeaderScroll);
     });
 
-    // ========== ANIMATION DU BOUTON WHATSAPP ==========
+    // ========== WHATSAPP BUTTON ANIMATION ==========
     /**
-     * Fait apparaître le bouton WhatsApp après un court délai
+     * Makes the WhatsApp button appear after a short delay
      */
     const whatsappButton = document.querySelector('.whatsapp-float');
     if (whatsappButton) {
@@ -150,10 +150,10 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 1000);
     }
 
-    // ========== LIEN ACTIF DANS LA NAVIGATION ==========
+    // ========== ACTIVE NAVIGATION LINK ==========
     /**
-     * Met à jour le lien actif dans la navigation
-     * en fonction de la section visible
+     * Updates the active link in navigation
+     * based on the visible section
      */
     const sections = document.querySelectorAll('section[id]');
 
@@ -187,34 +187,34 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // ========== INITIALISATION ==========
-    // Déclencher une première vérification au chargement
+    // ========== INITIALIZATION ==========
+    // Trigger first check on load
     handleHeaderScroll();
     updateActiveLink();
 
-    console.log('🧱 BrickShop - Site chargé avec succès !');
+    console.log('🧱 BrickShop - Site loaded successfully!');
 
 });
 
 /**
  * ============================================
- * PERSONNALISATION AVANCÉE
+ * ADVANCED CUSTOMIZATION
  * ============================================
  *
- * Pour ajouter des produits dynamiquement via JavaScript,
- * vous pouvez utiliser le code suivant :
+ * To add products dynamically via JavaScript,
+ * you can use the following code:
  *
- * const produits = [
+ * const products = [
  *     {
- *         titre: "Nom du produit",
- *         description: "Description courte",
- *         prix: "99,99 €",
- *         image: "url-de-limage.jpg",
- *         badge: "Nouveau" // optionnel
+ *         title: "Product Name",
+ *         description: "Short description",
+ *         price: "$99.99",
+ *         image: "images/products/product-name.jpg",
+ *         badge: "New" // optional
  *     }
  * ];
  *
- * Puis créer les cartes avec une boucle forEach.
- * Voir la documentation dans claude.md pour plus de détails.
+ * Then create the cards with a forEach loop.
+ * See the documentation in claude.md for more details.
  * ============================================
  */
