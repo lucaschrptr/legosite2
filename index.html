@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrickShop - Votre boutique de sets LEGO</title>
+
+    <!-- Google Fonts - Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- ========== HEADER ========== -->
+    <header class="header">
+        <div class="container">
+            <a href="#accueil" class="logo">
+                <span class="logo-icon">🧱</span>
+                BrickShop
+            </a>
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li><a href="#accueil" class="nav-link">Accueil</a></li>
+                    <li><a href="#produits" class="nav-link">Produits</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+                <!-- Menu hamburger pour mobile -->
+                <button class="menu-toggle" aria-label="Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ========== HERO SECTION ========== -->
+    <section id="accueil" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Construisez vos rêves<br>brique par brique</h1>
+                <p class="hero-subtitle">
+                    Découvrez notre sélection exclusive de sets LEGO pour tous les âges.
+                    Des classiques intemporels aux dernières nouveautés.
+                </p>
+                <a href="#produits" class="btn btn-primary">Découvrir nos LEGO</a>
+            </div>
+        </div>
+        <div class="hero-decoration">
+            <div class="brick brick-1"></div>
+            <div class="brick brick-2"></div>
+            <div class="brick brick-3"></div>
+        </div>
+    </section>
+
+    <!-- ========== PRODUITS SECTION ========== -->
+    <section id="produits" class="products">
+        <div class="container">
+            <h2 class="section-title">Nos Sets LEGO</h2>
+            <p class="section-subtitle">Une sélection pour tous les passionnés</p>
+
+            <!-- Grille de produits -->
+            <div class="products-grid">
+
+                <!-- Produit 1 -->
+                <article class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1587654780291-39c9404d746b?w=400&h=300&fit=crop"
+                             alt="LEGO Star Wars Millennium Falcon">
+                        <span class="product-badge">Populaire</span>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Millennium Falcon</h3>
+                        <p class="product-description">
+                            Le vaisseau légendaire de Han Solo avec 1351 pièces et 7 minifigurines.
+                        </p>
+                        <div class="product-footer">
+                            <span class="product-price">169,99 €</span>
+                            <a href="#contact" class="btn btn-secondary">Commander</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Produit 2 -->
+                <article class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1560961911-ba7ef651a56c?w=400&h=300&fit=crop"
+                             alt="LEGO Technic Ferrari">
+                        <span class="product-badge new">Nouveau</span>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Technic Ferrari 488 GTE</h3>
+                        <p class="product-description">
+                            Reproduisez la célèbre voiture de course avec un niveau de détail incroyable.
+                        </p>
+                        <div class="product-footer">
+                            <span class="product-price">179,99 €</span>
+                            <a href="#contact" class="btn btn-secondary">Commander</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Produit 3 -->
+                <article class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1518946222227-364f22132616?w=400&h=300&fit=crop"
+                             alt="LEGO Architecture Paris">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Architecture Paris</h3>
+                        <p class="product-description">
+                            La skyline de Paris avec la Tour Eiffel, l'Arc de Triomphe et le Louvre.
+                        </p>
+                        <div class="product-footer">
+                            <span class="product-price">49,99 €</span>
+                            <a href="#contact" class="btn btn-secondary">Commander</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Produit 4 -->
+                <article class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1596854407944-bf87f6fdd49e?w=400&h=300&fit=crop"
+                             alt="LEGO Harry Potter Poudlard">
+                        <span class="product-badge">Best-seller</span>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Château de Poudlard</h3>
+                        <p class="product-description">
+                            Le célèbre château de l'école de sorcellerie avec 6020 pièces magiques.
+                        </p>
+                        <div class="product-footer">
+                            <span class="product-price">399,99 €</span>
+                            <a href="#contact" class="btn btn-secondary">Commander</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Produit 5 -->
+                <article class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1585366119957-e9730b6d0f60?w=400&h=300&fit=crop"
+                             alt="LEGO Creator Expert">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Creator Expert - Garage</h3>
+                        <p class="product-description">
+                            Un garage vintage des années 50 avec voiture de collection et accessoires.
+                        </p>
+                        <div class="product-footer">
+                            <span class="product-price">199,99 €</span>
+                            <a href="#contact" class="btn btn-secondary">Commander</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Produit 6 -->
+                <article class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1472457897821-70d3819a0e24?w=400&h=300&fit=crop"
+                             alt="LEGO City Police">
+                        <span class="product-badge new">Nouveau</span>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">City - Commissariat</h3>
+                        <p class="product-description">
+                            Le commissariat de police complet avec véhicules et 8 minifigurines.
+                        </p>
+                        <div class="product-footer">
+                            <span class="product-price">89,99 €</span>
+                            <a href="#contact" class="btn btn-secondary">Commander</a>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== CONTACT SECTION ========== -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Contactez-nous</h2>
+            <p class="section-subtitle">Une question ? Besoin d'un conseil ? Nous sommes là pour vous !</p>
+
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <span class="contact-icon">📍</span>
+                        <div>
+                            <strong>Adresse</strong>
+                            <p>123 Rue des Briques, 75001 Paris</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">📧</span>
+                        <div>
+                            <strong>Email</strong>
+                            <p>contact@brickshop.fr</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">🕐</span>
+                        <div>
+                            <strong>Horaires</strong>
+                            <p>Lun - Sam : 10h - 19h</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-cta">
+                    <p>Pour une réponse rapide, contactez-nous directement sur WhatsApp !</p>
+                    <!--
+                        BOUTON WHATSAPP
+                        Pour changer le numéro, modifiez le lien ci-dessous.
+                        Format : https://wa.me/[indicatif pays][numéro sans espaces]
+                        Exemple France : https://wa.me/33612345678
+                    -->
+                    <a href="https://wa.me/33612345678?text=Bonjour,%20je%20suis%20intéressé(e)%20par%20vos%20sets%20LEGO"
+                       class="btn btn-whatsapp"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        <svg class="whatsapp-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                        </svg>
+                        Nous contacter sur WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo">🧱 BrickShop</span>
+                    <p>Votre partenaire LEGO depuis 2020</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#accueil">Accueil</a>
+                    <a href="#produits">Produits</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                <div class="footer-social">
+                    <a href="#" aria-label="Facebook" class="social-link">📘</a>
+                    <a href="#" aria-label="Instagram" class="social-link">📷</a>
+                    <a href="#" aria-label="Twitter" class="social-link">🐦</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 BrickShop. Tous droits réservés.</p>
+                <p>LEGO® est une marque déposée du groupe LEGO.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========== BOUTON WHATSAPP FLOTTANT ========== -->
+    <!--
+        Pour modifier le numéro WhatsApp, changez le lien ci-dessous.
+        Format : https://wa.me/[indicatif pays][numéro sans espaces]
+        Exemple pour la France : 33612345678 (sans le 0 initial)
+    -->
+    <a href="https://wa.me/33612345678?text=Bonjour,%20je%20souhaite%20des%20informations%20sur%20vos%20sets%20LEGO"
+       class="whatsapp-float"
+       target="_blank"
+       rel="noopener noreferrer"
+       aria-label="Contacter sur WhatsApp">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+    </a>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+</html>
