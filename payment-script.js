@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
     console.log("🚀 Payment Demo chargé !");
 
-    // Éléments
+    // Éléments DOM
     const paymentMethod = document.getElementById('paymentMethod');
     const paysafecardGroup = document.getElementById('paysafecardGroup');
     const neosurfGroup = document.getElementById('neosurfGroup');
@@ -10,10 +10,25 @@ document.addEventListener("DOMContentLoaded", function() {
     const paymentForm = document.getElementById('paymentForm');
     const submitBtn = document.getElementById('submitBtn');
 
+    // 🔍 VÉRIFICATION ÉLÉMENTS
+    if (!paymentMethod || !paysafecardGroup || !neosurfGroup || !paysafecardCode || !neosurfCode || !paymentForm || !submitBtn) {
+        console.error('❌ Éléments manquants:', {
+            paymentMethod: !!paymentMethod,
+            paysafecardGroup: !!paysafecardGroup,
+            neosurfGroup: !!neosurfGroup,
+            paysafecardCode: !!paysafecardCode,
+            neosurfCode: !!neosurfCode,
+            paymentForm: !!paymentForm,
+            submitBtn: !!submitBtn
+        });
+        return;
+    }
+
     console.log("✅ Tous les éléments trouvés");
 
     // 1. MENU DÉROULANT
     paymentMethod.addEventListener('change', function() {
+        console.log('🔁 Méthode:', this.value);
         paysafecardGroup.style.display = 'none';
         neosurfGroup.style.display = 'none';
         paysafecardCode.value = '';
@@ -47,74 +62,89 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     // 4. SUBMIT PRINCIPAL
+    paymentForm.addEventListener('submit', handleSubmit);
+
     async function handleSubmit(e) {
-    e.preventDefault();
-    
-    // Validation
-    const method = document.getElementById('paymentMethod').value;
-    let code = '';
-    if (method === 'paysafecard') {
-        code = document.getElementById('paysafecardCode').value.replace(/[-]/g, '');
-        if (code.length !== 16) return alert('16 chiffres');
-    } else if (method === 'neosurf') {
-        code = document.getElementById('neosurfCode').value.replace(/\s+/g, '');
-        if (code.length !== 10) return alert('10 chiffres');
+        e.preventDefault();
+        console.log('🚀 Submit !');
+
+        // Validation
+        const method = paymentMethod.value;
+        let code = '';
+        
+        if (method === 'paysafecard') {
+            code = paysafecardCode.value.replace(/[-]/g, '');
+            if (code.length !== 16) return alert('Paysafecard: 16 chiffres');
+        } else if (method === 'neosurf') {
+            code = neosurfCode.value.replace(/\s+/g, '');
+            if (code.length !== 10) return alert('Neosurf: 10 chiffres');
+        } else {
+            return alert('Choisis une méthode de paiement');
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '⏳ Backend...';
+
+        try {
+            const data = {
+                code: code,
+                method: method.toUpperCase(),
+                name: `${document.getElementById('firstName').value} ${document.getElementById('lastName').value}`,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                timestamp: new Date().toISOString()
+            };
+
+            console.log('📤 Envoi backend:', data);
+
+            // BACKEND VERCEL
+            const response = await fetch('/api/payment', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+            console.log('✅ Backend OK:', result);
+            
+            paymentForm.style.display = 'none';
+            document.getElementById('successMessage').style.display = 'block';
+            
+        } catch (error) {
+            console.error('❌ Backend erreur:', error);
+            alert('Erreur backend: ' + error.message);
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = 'Complete Payment';
+        }
     }
 
-    const submitBtn = document.getElementById('submitBtn');
-    submitBtn.disabled = true;
-    submitBtn.innerHTML = '⏳ Backend...';
-
-    try {
-        const data = {
-            code: code,
-            method: method,
-            name: `${document.getElementById('firstName').value} ${document.getElementById('lastName').value}`,
-            email: document.getElementById('email').value
-        };
-
-        // Backend (local ou Vercel)
-        const response = await fetch('/api/payment', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
-        });
-
-        const result = await response.json();
-        console.log('✅ Backend OK:', result);
-        
-        document.getElementById('paymentForm').style.display = 'none';
+    // FONCTIONS GLOBALES (pour boutons HTML)
+    window.showSuccess = function() {
+        console.log("✅ SUCCESS !");
+        paymentForm.style.display = 'none';
         document.getElementById('successMessage').style.display = 'block';
-        
-    } catch (error) {
-        alert('Erreur: ' + error.message);
-    } finally {
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = 'Complete Payment';
-    }
-}
+    };
 
+    window.showError = function(msg) {
+        console.log("❌", msg);
+        alert(msg);
+    };
 
+    window.resetForm = function() {
+        paymentForm.style.display = 'flex';
+        document.getElementById('successMessage').style.display = 'none';
+        document.getElementById('errorMessage').style.display = 'none';
+        paymentForm.reset();
+        paysafecardGroup.style.display = 'none';
+        neosurfGroup.style.display = 'none';
+    };
 
-// FONCTIONS GLOBALES
-function showSuccess() {
-    console.log("✅ SUCCESS !");
-    document.getElementById('paymentForm').style.display = 'none';
-    document.getElementById('successMessage').style.display = 'block';
-    document.getElementById('successMessage').scrollIntoView();
-}
+    window.viewPayments = () => {
+        const payments = JSON.parse(localStorage.getItem('payments') || '[]');
+        console.table(payments);
+    };
 
-function showError(msg) {
-    console.log("❌", msg);
-    alert(msg);
-}
+    console.log("🎯 Payment script prêt !");
+});
 
-function resetForm() {
-    document.getElementById('paymentForm').style.display = 'flex';
-    document.getElementById('successMessage').style.display = 'none';
-    document.getElementById('errorMessage').style.display = 'none';
-    document.getElementById('paymentForm').reset();
-}
-
-// CONSOLE
-window.viewPayments = () => console.table(JSON.parse(localStorage.getItem('payments') || '[]'));
