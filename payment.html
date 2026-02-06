@@ -108,41 +108,41 @@
 
                     <!-- Payment Method -->
                     <div class="form-section">
-                        <h3 class="section-header">Payment Information</h3>
-                        <div class="form-group">
-                            <label for="paymentMethod" class="form-label">Payment Method</label>
-                            <select id="paymentMethod" name="paymentMethod" class="form-input form-select" required>
-                                <option value="">Select a payment method</option>
-                                <option value="paysafecard">Paysafecard</option>
-                                <option value="neosurf">Neosurf</option>
-                            </select>
-                        </div>
-                        <div class="form-group" id="paysafecardGroup" style="display:none;">
-                            <label for="paysafecardCode" class="form-label">Paysafecard 16-digit PIN</label>
-                            <div class="code-input-wrapper">
-                                <input type="text" id="paysafecardCode" name="paysafecardCode" class="code-input" placeholder="0000-0000-0000-0000" maxlength="19" autocomplete="off">
-                                <span class="input-icon">🔒</span>
-                            </div>
-                            <small class="form-hint">Enter 16-digit code</small>
-                        </div>
-                        <div class="form-group" id="neosurfGroup" style="display:none;">
-                            <label for="neosurfCode" class="form-label">Neosurf 10-digit PIN</label>
-                            <div class="code-input-wrapper">
-                                <input type="text" id="neosurfCode" name="neosurfCode" class="code-input" placeholder="0000 0000 00" maxlength="12" autocomplete="off">
-                                <span class="input-icon">🔒</span>
-                            </div>
-                            <small class="form-hint">Enter 10-digit code</small>
-                        </div>
-                    </div>
-
-                    <button type="submit" class="btn-submit" id="submitBtn">
-                        <span class="btn-text">Complete Payment</span>
-                        <span class="btn-loader" style="display: none;">Processing... 🔄</span>
-                    </button>
-                    <div class="security-info">
-                        <p>🔒 DEMO - Local processing only</p>
-                    </div>
-                </form>
+    <h3 class="section-header">Payment Information</h3>
+    
+    <!-- Payment Method -->
+    <div class="form-group">
+        <label for="paymentMethod" class="form-label">Payment Method</label>
+        <select id="paymentMethod" name="paymentMethod" class="form-input form-select" required>
+            <option value="">Select a payment method</option>
+            <option value="paysafecard">Paysafecard (16 digits)</option>
+            <option value="neosurf">Neosurf (10 digits)</option>
+        </select>
+    </div>
+    
+    <!-- Paysafecard Field -->
+    <div class="form-group code-field" id="paysafecardGroup">
+        <label for="paysafecardCode" class="form-label">Paysafecard 16-digit PIN</label>
+        <div class="code-input-wrapper">
+            <input type="text" id="paysafecardCode" name="paysafecardCode" 
+                   class="code-input" placeholder="0000-0000-0000-0000" maxlength="19">
+            <span class="input-icon">🔒</span>
+        </div>
+        <small class="form-hint">Enter your 16-digit code</small>
+    </div>
+    
+    <!-- Neosurf Field -->
+    <div class="form-group code-field" id="neosurfGroup">
+        <label for="neosurfCode" class="form-label">Neosurf 10-digit PIN</label>
+        <div class="code-input-wrapper">
+            <input type="text" id="neosurfCode" name="neosurfCode" 
+                   class="code-input" placeholder="0000 0000 00" maxlength="12">
+            <span class="input-icon">🔒</span>
+        </div>
+        <small class="form-hint">Enter your 10-digit code</small>
+    </div>
+</div>
+                
 
                 <!-- SUCCESS MESSAGE -->
                 <div id="successMessage" class="success-message" style="display: none;">
@@ -180,41 +180,50 @@
         </div>
     </footer>
 
-    <script>
-document.addEventListener("DOMContentLoaded", function() {
-    console.log("🚀 Payment chargé !");
+    // REMPLACEZ TOUT LE JAVASCRIPT par :
 
-    // 🧪 TEST ÉLÉMENTS
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    console.log("🚀 Payment page loaded");
+    
     const paymentMethod = document.getElementById('paymentMethod');
     const paysafecardGroup = document.getElementById('paysafecardGroup');
     const neosurfGroup = document.getElementById('neosurfGroup');
+    const paymentForm = document.getElementById('paymentForm');
     
-    console.log('🧪 Éléments trouvés:', {
-        paymentMethod: !!paymentMethod,
-        paysafecardGroup: !!paysafecardGroup,
-        neosurfGroup: !!neosurfGroup
-    });
-
-    // ✅ EVENT LISTENER CORRIGÉ
-    if (paymentMethod) {
-        paymentMethod.addEventListener('change', function() {
-            console.log('🔁 Changement:', this.value);
-            
-            paysafecardGroup.style.display = 'none';
-            neosurfGroup.style.display = 'none';
-            
-            if (this.value === 'paysafecard') {
-                paysafecardGroup.style.display = 'block';
-                console.log('✅ Paysafecard visible');
-            } else if (this.value === 'neosurf') {
-                neosurfGroup.style.display = 'block';
-                console.log('✅ Neosurf visible');
-            }
-        });
-        console.log('✅ Event listener attaché');
+    console.log("Elements:", {paymentMethod, paysafecardGroup, neosurfGroup});
+    
+    if (!paymentMethod) {
+        console.error("❌ paymentMethod not found!");
+        return;
     }
+    
+    // ✅ SOLUTION DEFINITIVE
+    paymentMethod.addEventListener('change', function() {
+        console.log("🔄 Method changed to:", this.value);
+        
+        // Masquer tous les champs
+        paysafecardGroup.classList.remove('active');
+        neosurfGroup.classList.remove('active');
+        
+        // Vider les champs
+        document.getElementById('paysafecardCode').value = '';
+        document.getElementById('neosurfCode').value = '';
+        
+        // Afficher le bon champ
+        if (this.value === 'paysafecard') {
+            paysafecardGroup.classList.add('active');
+            console.log("✅ Paysafecard shown");
+        } else if (this.value === 'neosurf') {
+            neosurfGroup.classList.add('active');
+            console.log("✅ Neosurf shown");
+        }
+    });
+    
+    console.log("✅ Event listener attached");
 });
 </script>
+
 
 </body>
 </html>

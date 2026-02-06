@@ -352,3 +352,21 @@
 #neosurfGroup {
     display: block !important; /* FORCÉ */
 }
+
+
+
+/* AJOUTEZ CES RÈGLES CSS à la fin de payment-styles.css */
+
+.code-field {
+    height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    margin-bottom: 0;
+}
+
+.code-field.active {
+    height: auto;
+    opacity: 1;
+    margin-bottom: 20px;
+}
