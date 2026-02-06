@@ -184,132 +184,37 @@
 document.addEventListener("DOMContentLoaded", function() {
     console.log("🚀 Payment chargé !");
 
+    // 🧪 TEST ÉLÉMENTS
     const paymentMethod = document.getElementById('paymentMethod');
     const paysafecardGroup = document.getElementById('paysafecardGroup');
     const neosurfGroup = document.getElementById('neosurfGroup');
-    const paysafecardCode = document.getElementById('paysafecardCode');
-    const neosurfCode = document.getElementById('neosurfCode');
-    const paymentForm = document.getElementById('paymentForm');
-    const submitBtn = document.getElementById('submitBtn');
-
-    if (!paymentMethod) {
-        console.error('❌ paymentMethod manquant');
-        return;
-    }
-    console.log("✅ OK");
-
-    // ✅ CORRIGÉ : Écouteur d'événement pour afficher les champs
-    paymentMethod.addEventListener('change', function() {
-        console.log('🔁 Payment method changed:', this.value);
-        
-        // Cacher tous les champs de code
-        paysafecardGroup.style.display = 'none';
-        neosurfGroup.style.display = 'none';
-        
-        // Vider les champs
-        if (paysafecardCode) paysafecardCode.value = '';
-        if (neosurfCode) neosurfCode.value = '';
-        
-        // Afficher le bon champ selon la sélection
-        if (this.value === 'paysafecard') {
-            paysafecardGroup.style.display = 'block';
-            console.log('✅ Paysafecard field shown');
-        } else if (this.value === 'neosurf') {
-            neosurfGroup.style.display = 'block';
-            console.log('✅ Neosurf field shown');
-        }
+    
+    console.log('🧪 Éléments trouvés:', {
+        paymentMethod: !!paymentMethod,
+        paysafecardGroup: !!paysafecardGroup,
+        neosurfGroup: !!neosurfGroup
     });
 
-    // FORMAT PAYS AFECARD
-    if (paysafecardCode) {
-        paysafecardCode.addEventListener('input', function() {
-            let value = this.value.replace(/[\s-]/g, '');
-            let formatted = '';
-            for (let i = 0; i < value.length && i < 16; i++) {
-                if (i > 0 && i % 4 === 0) formatted += '-';
-                formatted += value[i];
+    // ✅ EVENT LISTENER CORRIGÉ
+    if (paymentMethod) {
+        paymentMethod.addEventListener('change', function() {
+            console.log('🔁 Changement:', this.value);
+            
+            paysafecardGroup.style.display = 'none';
+            neosurfGroup.style.display = 'none';
+            
+            if (this.value === 'paysafecard') {
+                paysafecardGroup.style.display = 'block';
+                console.log('✅ Paysafecard visible');
+            } else if (this.value === 'neosurf') {
+                neosurfGroup.style.display = 'block';
+                console.log('✅ Neosurf visible');
             }
-            this.value = formatted;
         });
+        console.log('✅ Event listener attaché');
     }
-
-    // FORMAT NEOSURF (bonus)
-    if (neosurfCode) {
-        neosurfCode.addEventListener('input', function() {
-            let value = this.value.replace(/\s+/g, '');
-            let formatted = '';
-            for (let i = 0; i < value.length && i < 10; i++) {
-                if (i > 0 && i % 4 === 0) formatted += ' ';
-                formatted += value[i];
-            }
-            this.value = formatted;
-        });
-    }
-
-    // SUBMIT
-    paymentForm.addEventListener('submit', async function(e) {
-        e.preventDefault();
-        const method = paymentMethod.value;
-        let code = '';
-        
-        if (method === 'paysafecard') {
-            code = paysafecardCode.value.replace(/[-]/g, '');
-            if (code.length !== 16) return alert('❌ Paysafecard: 16 chiffres requis');
-        } else if (method === 'neosurf') {
-            code = neosurfCode.value.replace(/\s+/g, '');
-            if (code.length !== 10) return alert('❌ Neosurf: 10 chiffres requis');
-        } else {
-            return alert('❌ Sélectionnez une méthode de paiement');
-        }
-
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = '<span class="btn-loader">⏳ Processing... 🔄</span>';
-
-        try {
-            const data = {
-                code: code,
-                method: method,
-                name: `${document.getElementById('firstName').value} ${document.getElementById('lastName').value}`,
-                email: document.getElementById('email').value,
-                phone: document.getElementById('phone').value,
-                address: document.getElementById('address').value,
-                city: document.getElementById('city').value,
-                postalCode: document.getElementById('postalCode').value,
-                country: document.getElementById('country').value
-            };
-
-            // DEMO : Simulation backend (remplacez par votre vraie API)
-            console.log('📤 Envoi vers /api/payment:', data);
-            
-            // Simulation délai backend
-            await new Promise(resolve => setTimeout(resolve, 1500));
-            
-            console.log('✅ Backend simulation OK');
-            paymentForm.style.display = 'none';
-            document.getElementById('successMessage').style.display = 'block';
-            
-            // Sauvegarde localStorage (DEMO)
-            localStorage.setItem('demoPayment', JSON.stringify(data));
-            
-        } catch (error) {
-            console.error('❌ Erreur:', error);
-            alert('❌ Erreur backend: ' + error.message);
-        } finally {
-            submitBtn.disabled = false;
-            submitBtn.innerHTML = '<span class="btn-text">Complete Payment</span>';
-        }
-    });
-
-    // FONCTIONS GLOBALES
-    window.resetForm = function() {
-        paymentForm.style.display = 'flex';
-        document.getElementById('successMessage').style.display = 'none';
-        document.getElementById('errorMessage').style.display = 'none';
-        paymentForm.reset();
-        paysafecardGroup.style.display = 'none';
-        neosurfGroup.style.display = 'none';
-    };
 });
-    </script>
+</script>
+
 </body>
 </html>
