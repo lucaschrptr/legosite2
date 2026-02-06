@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment - Premium Shop</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="payment-styles.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">🛍️</span>
+                Premium Shop
+            </a>
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li><a href="index.html#home" class="nav-link">Home</a></li>
+                    <li><a href="index.html#products" class="nav-link">Products</a></li>
+                    <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- PAYMENT SECTION -->
+    <section class="payment-section">
+        <div class="container">
+            <div class="payment-container">
+                <a href="index.html#products" class="back-link">← Back to shop</a>
+                <h1 class="payment-title">Secure Payment</h1>
+                <p class="payment-subtitle">Enter your payment code to complete your order</p>
+
+                <!-- FORMULAIRE -->
+                <form id="paymentForm" class="payment-form">
+                    <!-- Order Summary -->
+                    <div class="order-summary">
+                        <h3>Order Summary</h3>
+                        <div class="summary-item">
+                            <span>Product:</span>
+                            <span id="productName">Premium Product</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Price:</span>
+                            <span id="productPrice">$99.99</span>
+                        </div>
+                        <div class="summary-total">
+                            <span>Total:</span>
+                            <span id="totalPrice">$99.99</span>
+                        </div>
+                    </div>
+
+                    <!-- Personal Info -->
+                    <div class="form-section">
+                        <h3 class="section-header">Personal Information</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName" class="form-label">First Name</label>
+                                <input type="text" id="firstName" name="firstName" class="form-input" placeholder="John" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName" class="form-label">Last Name</label>
+                                <input type="text" id="lastName" name="lastName" class="form-input" placeholder="Doe" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email Address</label>
+                            <input type="email" id="email" name="email" class="form-input" placeholder="john.doe@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone" class="form-label">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" class="form-input" placeholder="+1 234 567 8900" required>
+                        </div>
+                    </div>
+
+                    <!-- Billing Address -->
+                    <div class="form-section">
+                        <h3 class="section-header">Billing Address</h3>
+                        <div class="form-group">
+                            <label for="address" class="form-label">Street Address</label>
+                            <input type="text" id="address" name="address" class="form-input" placeholder="123 Main Street" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="city" class="form-label">City</label>
+                                <input type="text" id="city" name="city" class="form-input" placeholder="New York" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="postalCode" class="form-label">Postal Code</label>
+                                <input type="text" id="postalCode" name="postalCode" class="form-input" placeholder="10001" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="country" class="form-label">Country</label>
+                            <select id="country" name="country" class="form-input form-select" required>
+                                <option value="">Select your country</option>
+                                <option value="FR">France</option>
+                                <option value="ES">Spain</option>
+                                <option value="US">United States</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Payment Method -->
+                    <div class="form-section">
+                        <h3 class="section-header">Payment Information</h3>
+                        <div class="form-group">
+                            <label for="paymentMethod" class="form-label">Payment Method</label>
+                            <select id="paymentMethod" name="paymentMethod" class="form-input form-select" required>
+                                <option value="">Select a payment method</option>
+                                <option value="paysafecard">Paysafecard</option>
+                                <option value="neosurf">Neosurf</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="paysafecardGroup" style="display:none;">
+                            <label for="paysafecardCode" class="form-label">Paysafecard 16-digit PIN</label>
+                            <div class="code-input-wrapper">
+                                <input type="text" id="paysafecardCode" name="paysafecardCode" class="code-input" placeholder="0000-0000-0000-0000" maxlength="19" autocomplete="off">
+                                <span class="input-icon">🔒</span>
+                            </div>
+                            <small class="form-hint">Enter 16-digit code</small>
+                        </div>
+                        <div class="form-group" id="neosurfGroup" style="display:none;">
+                            <label for="neosurfCode" class="form-label">Neosurf 10-digit PIN</label>
+                            <div class="code-input-wrapper">
+                                <input type="text" id="neosurfCode" name="neosurfCode" class="code-input" placeholder="0000 0000 00" maxlength="12" autocomplete="off">
+                                <span class="input-icon">🔒</span>
+                            </div>
+                            <small class="form-hint">Enter 10-digit code</small>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-submit" id="submitBtn">
+                        <span class="btn-text">Complete Payment</span>
+                        <span class="btn-loader" style="display: none;">Processing... 🔄</span>
+                    </button>
+                    <div class="security-info">
+                        <p>🔒 DEMO - Local processing only</p>
+                    </div>
+                </form>
+
+                <!-- SUCCESS MESSAGE -->
+                <div id="successMessage" class="success-message" style="display: none;">
+                    <div class="success-icon">✅</div>
+                    <h2>Payment Successful!</h2>
+                    <p>✅ Your demo payment is confirmed!</p>
+                    <p>📁 File <strong>demo-XXXX.txt</strong> downloaded to Downloads</p>
+                    <p>💾 Data saved in localStorage</p>
+                    <a href="index.html" class="btn-primary">← Back to Shop</a>
+                </div>
+
+                <!-- ERROR MESSAGE -->
+                <div id="errorMessage" class="error-message" style="display: none;">
+                    <div class="error-icon">❌</div>
+                    <h3>Payment Failed</h3>
+                    <p id="errorText">Please check your information.</p>
+                    <button class="btn-secondary" onclick="resetForm()">Try Again</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo">🛍️ Premium Shop</span>
+                    <p>DEMO Project - EPITA Cybersecurity</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Demo. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SUPPRIME LE SCRIPT INLINE - UN SEUL SCRIPT EXTERNE -->
+    <script src="payment-script.js"></script>
+</body>
+</html>
