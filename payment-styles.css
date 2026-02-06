@@ -344,3 +344,11 @@
         font-size: 1.1rem;
     }
 }
+
+
+
+/* AJOUTEZ en fin du CSS */
+#paysafecardGroup,
+#neosurfGroup {
+    display: block !important; /* FORCÉ */
+}
