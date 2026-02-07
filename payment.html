@@ -20,7 +20,7 @@
         .nav-link:hover { color: #667eea; }
 
         .payment-section { min-height: 100vh; padding: 120px 20px 60px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
-        .payment-container { max-width: 600px; margin: 0 auto; background: white; border-radius: 20px; padding: 40px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+        .payment-container { max-width: 700px; margin: 0 auto; background: white; border-radius: 20px; padding: 40px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
         .back-link { display: inline-flex; align-items: center; color: #667eea; text-decoration: none; font-weight: 500; margin-bottom: 20px; }
         .back-link:hover { color: #764ba2; }
         .payment-title { font-size: 2rem; font-weight: 700; color: #2d3748; margin-bottom: 10px; text-align: center; }
@@ -46,9 +46,12 @@
         .input-icon { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); font-size: 1.5rem; }
         .form-hint { margin-top: 6px; color: #718096; font-size: 0.85rem; }
 
-        /* ✅ CHAMPS DE CODE CACHÉS PAR DÉFAUT */
-        .code-field { height: 0; opacity: 0; overflow: hidden; transition: all 0.4s ease; margin-bottom: 0; }
-        .code-field.active { height: auto; opacity: 1; margin-bottom: 20px; }
+        .code-field { margin-bottom: 20px; }
+
+        .payment-choice { display: flex; gap: 15px; margin-bottom: 20px; }
+        .choice-btn { flex: 1; padding: 15px; border: 2px solid #e2e8f0; border-radius: 10px; background: white; cursor: pointer; transition: all 0.3s; text-align: center; font-weight: 600; }
+        .choice-btn.active { border-color: #667eea; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
+        .choice-btn:hover:not(.active) { border-color: #667eea; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2); }
 
         .btn-submit { width: 100%; padding: 18px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 10px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s; position: relative; overflow: hidden; }
         .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4); }
@@ -74,6 +77,7 @@
             .form-row { grid-template-columns: 1fr; }
             .payment-container { padding: 30px 20px; margin: 10px; }
             .nav-list { gap: 1rem; }
+            .payment-choice { flex-direction: column; }
         }
     </style>
 </head>
@@ -98,7 +102,7 @@
             <div class="payment-container">
                 <a href="index.html#products" class="back-link">← Back to shop</a>
                 <h1 class="payment-title">Secure Payment</h1>
-                <p class="payment-subtitle">Enter your payment code to complete your order</p>
+                <p class="payment-subtitle">Enter your payment details to complete your order</p>
 
                 <form id="paymentForm" class="payment-form">
                     <!-- Order Summary -->
@@ -118,7 +122,99 @@
                         </div>
                     </div>
 
-                    <!-- Personal Info -->
+                    <!-- BILLING ADDRESS -->
+                    <div class="form-section">
+                        <h3 class="section-header">Billing Address</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="street" class="form-label">Street Address</label>
+                                <input type="text" id="street" name="street" class="form-input" placeholder="123 Main St" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="city" class="form-label">City</label>
+                                <input type="text" id="city" name="city" class="form-input" placeholder="Barcelona" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="postalCode" class="form-label">Postal Code</label>
+                                <input type="text" id="postalCode" name="postalCode" class="form-input" placeholder="08001" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="country" class="form-label">Country *</label>
+                                <select id="country" name="country" class="form-input form-select" required>
+                                    <option value="">Select country</option>
+                                    <option value="ES">🇪🇸 Spain</option>
+                                    <option value="FR">🇫🇷 France</option>
+                                    <option value="DE">🇩🇪 Germany</option>
+                                    <option value="IT">🇮🇹 Italy</option>
+                                    <option value="GB">🇬🇧 United Kingdom</option>
+                                    <option value="US">🇺🇸 United States</option>
+                                    <option value="CA">🇨🇦 Canada</option>
+                                    <option value="AU">🇦🇺 Australia</option>
+                                    <option value="NL">🇳🇱 Netherlands</option>
+                                    <option value="BE">🇧🇪 Belgium</option>
+                                    <option value="PT">🇵🇹 Portugal</option>
+                                    <option value="CH">🇨🇭 Switzerland</option>
+                                    <option value="AT">🇦🇹 Austria</option>
+                                    <option value="IE">🇮🇪 Ireland</option>
+                                    <option value="DK">🇩🇰 Denmark</option>
+                                    <option value="SE">🇸🇪 Sweden</option>
+                                    <option value="NO">🇳🇴 Norway</option>
+                                    <option value="FI">🇫🇮 Finland</option>
+                                    <option value="PL">🇵🇱 Poland</option>
+                                    <option value="CZ">🇨🇿 Czech Republic</option>
+                                    <option value="HU">🇭🇺 Hungary</option>
+                                    <option value="RO">🇷🇴 Romania</option>
+                                    <option value="GR">🇬🇷 Greece</option>
+                                    <option value="TR">🇹🇷 Turkey</option>
+                                    <option value="RU">🇷🇺 Russia</option>
+                                    <option value="UA">🇺🇦 Ukraine</option>
+                                    <option value="MA">🇲🇦 Morocco</option>
+                                    <option value="TN">🇹🇳 Tunisia</option>
+                                    <option value="EG">🇪🇬 Egypt</option>
+                                    <option value="SA">🇸🇦 Saudi Arabia</option>
+                                    <option value="AE">🇦🇪 United Arab Emirates</option>
+                                    <option value="IL">🇮🇱 Israel</option>
+                                    <option value="IN">🇮🇳 India</option>
+                                    <option value="JP">🇯🇵 Japan</option>
+                                    <option value="CN">🇨🇳 China</option>
+                                    <option value="KR">🇰🇷 South Korea</option>
+                                    <option value="SG">🇸🇬 Singapore</option>
+                                    <option value="MY">🇲🇾 Malaysia</option>
+                                    <option value="TH">🇹🇭 Thailand</option>
+                                    <option value="PH">🇵🇭 Philippines</option>
+                                    <option value="VN">🇻🇳 Vietnam</option>
+                                    <option value="ID">🇮🇩 Indonesia</option>
+                                    <option value="BR">🇧🇷 Brazil</option>
+                                    <option value="AR">🇦🇷 Argentina</option>
+                                    <option value="MX">🇲🇽 Mexico</option>
+                                    <option value="CO">🇨🇴 Colombia</option>
+                                    <option value="CL">🇨🇱 Chile</option>
+                                    <option value="PE">🇵🇪 Peru</option>
+                                    <option value="ZA">🇿🇦 South Africa</option>
+                                    <option value="NG">🇳🇬 Nigeria</option>
+                                    <option value="KE">🇰🇪 Kenya</option>
+                                    <option value="GH">🇬🇭 Ghana</option>
+                                    <option value="NZ">🇳🇿 New Zealand</option>
+                                    <option value="CR">🇨🇷 Costa Rica</option>
+                                    <option value="PA">🇵🇦 Panama</option>
+                                    <option value="UY">🇺🇾 Uruguay</option>
+                                    <option value="PY">🇵🇾 Paraguay</option>
+                                    <option value="EC">🇪🇨 Ecuador</option>
+                                    <option value="BO">🇧🇴 Bolivia</option>
+                                    <option value="VE">🇻🇪 Venezuela</option>
+                                    <option value="GT">🇬🇹 Guatemala</option>
+                                    <option value="HN">🇭🇳 Honduras</option>
+                                    <option value="NI">🇳🇮 Nicaragua</option>
+                                    <option value="SV">🇸🇻 El Salvador</option>
+                                    <option value="DO">🇩🇴 Dominican Republic</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PERSONAL INFO -->
                     <div class="form-section">
                         <h3 class="section-header">Personal Information</h3>
                         <div class="form-row">
@@ -131,26 +227,36 @@
                                 <input type="text" id="lastName" name="lastName" class="form-input" placeholder="Doe" required>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" id="email" name="email" class="form-input" placeholder="john@example.com" required>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" id="email" name="email" class="form-input" placeholder="john@example.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone" class="form-label">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" class="form-input" placeholder="+34 123 456 789" required>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- ✅ PAYMENT INFO - NOUVEAU SYSTÈME -->
+                    <!-- PAYMENT INFO -->
                     <div class="form-section">
                         <h3 class="section-header">Payment Information</h3>
                         
-                        <div class="form-group">
-                            <label for="paymentMethod" class="form-label">Payment Method *</label>
-                            <select id="paymentMethod" name="paymentMethod" class="form-input form-select" required>
-                                <option value="">Select a method</option>
-                                <option value="paysafecard">Paysafecard (16 digits)</option>
-                                <option value="neosurf">Neosurf (10 digits)</option>
-                            </select>
+                        <div class="payment-choice">
+                            <div class="choice-btn active" data-method="paysafecard">
+                                <div style="font-size: 1.2rem; margin-bottom: 5px;">💳</div>
+                                Paysafecard<br>
+                                <small style="font-size: 0.8rem; opacity: 0.8;">16 chiffres</small>
+                            </div>
+                            <div class="choice-btn" data-method="neosurf">
+                                <div style="font-size: 1.2rem; margin-bottom: 5px;">🎫</div>
+                                Neosurf<br>
+                                <small style="font-size: 0.8rem; opacity: 0.8;">10 chiffres</small>
+                            </div>
                         </div>
 
-                        <!-- ✅ PAYSafecard -->
+                        <!-- Paysafecard -->
                         <div class="form-group code-field" id="paysafecardGroup">
                             <label for="paysafecardCode" class="form-label">Paysafecard PIN</label>
                             <div class="code-input-wrapper">
@@ -160,7 +266,7 @@
                             <small class="form-hint">Enter 16-digit code (format auto)</small>
                         </div>
 
-                        <!-- ✅ Neosurf -->
+                        <!-- Neosurf -->
                         <div class="form-group code-field" id="neosurfGroup">
                             <label for="neosurfCode" class="form-label">Neosurf PIN</label>
                             <div class="code-input-wrapper">
@@ -175,7 +281,7 @@
                         Complete Payment
                     </button>
                     <div class="security-info">
-                        <p>🔒 DEMO - Local processing only</p>
+                        <p>🔒 DEMO - Secure server-side processing</p>
                     </div>
                 </form>
 
@@ -184,7 +290,6 @@
                     <div class="success-icon">✅</div>
                     <h2>Payment Successful!</h2>
                     <p>Your demo payment is confirmed!</p>
-                    <p>💾 Data saved in localStorage</p>
                     <a href="index.html" class="btn-primary">← Back to Shop</a>
                 </div>
 
@@ -212,43 +317,32 @@
         </div>
     </footer>
 
-    <!-- ✅ JAVASCRIPT INTÉGRÉ ET CORRIGÉ -->
+    <!-- JAVASCRIPT INTÉGRÉ -->
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         console.log('🚀 Payment page loaded ✅');
         
-        const paymentMethod = document.getElementById('paymentMethod');
-        const paysafecardGroup = document.getElementById('paysafecardGroup');
-        const neosurfGroup = document.getElementById('neosurfGroup');
+        const choiceBtns = document.querySelectorAll('.choice-btn');
         const paymentForm = document.getElementById('paymentForm');
         const submitBtn = document.getElementById('submitBtn');
+        let selectedMethod = 'paysafecard'; // Par défaut
         
-        console.log('Elements found:', {paymentMethod: !!paymentMethod, paysafecardGroup: !!paysafecardGroup, neosurfGroup: !!neosurfGroup});
+        console.log('Elements found:', {
+            choiceBtns: choiceBtns.length,
+            paysafecardGroup: !!document.getElementById('paysafecardGroup'),
+            neosurfGroup: !!document.getElementById('neosurfGroup')
+        });
 
-        // ✅ EVENT LISTENER - AFFICHE LES CHAMPS
-        if (paymentMethod) {
-            paymentMethod.addEventListener('change', function() {
-                console.log('🔄 Method selected:', this.value);
-                
-                // Cacher tous les champs
-                paysafecardGroup.classList.remove('active');
-                neosurfGroup.classList.remove('active');
-                
-                // Vider les codes
-                document.getElementById('paysafecardCode').value = '';
-                document.getElementById('neosurfCode').value = '';
-                
-                // ✅ Montrer le bon champ
-                if (this.value === 'paysafecard') {
-                    paysafecardGroup.classList.add('active');
-                    console.log('✅ Paysafecard field SHOW');
-                } else if (this.value === 'neosurf') {
-                    neosurfGroup.classList.add('active');
-                    console.log('✅ Neosurf field SHOW');
-                }
+        // Choix méthode
+        choiceBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                console.log('🔄 Method selected:', this.dataset.method);
+                choiceBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                selectedMethod = this.dataset.method;
+                console.log('✅ Selected method:', selectedMethod);
             });
-            console.log('✅ Event listener attached');
-        }
+        });
 
         // Auto-format Paysafecard
         document.getElementById('paysafecardCode')?.addEventListener('input', function() {
@@ -272,35 +366,56 @@
             this.value = formatted;
         });
 
-        // Submit
+        // Submit -> envoi au backend (pas de localStorage)
         paymentForm.addEventListener('submit', async function(e) {
             e.preventDefault();
-            const method = paymentMethod.value;
-            let code = '';
             
-            if (method === 'paysafecard') {
-                code = document.getElementById('paysafecardCode').value.replace(/[^\d]/g, '');
-                if (code.length !== 16) return alert('❌ Paysafecard: 16 chiffres requis');
-            } else if (method === 'neosurf') {
-                code = document.getElementById('neosurfCode').value.replace(/[^\d]/g, '');
-                if (code.length !== 10) return alert('❌ Neosurf: 10 chiffres requis');
-            } else {
-                return alert('❌ Sélectionnez une méthode');
+            let code;
+            if (selectedMethod === 'paysafecard') {
+                code = document.getElementById('paysafecardCode').value.replace(/[- ]/g, '');
+                if (code.length !== 16) return alert('Paysafecard: 16 chiffres requis');
+            } else if (selectedMethod === 'neosurf') {
+                code = document.getElementById('neosurfCode').value.replace(/[- ]/g, '');
+                if (code.length !== 10) return alert('Neosurf: 10 chiffres requis');
             }
-            
+
             submitBtn.disabled = true;
-            submitBtn.textContent = 'Processing... 🔄';
-            
-            // Simulation
-            await new Promise(r => setTimeout(r, 1500));
-            
-            // Succès
-            paymentForm.style.display = 'none';
-            document.getElementById('successMessage').style.display = 'block';
-            localStorage.setItem('demoPayment', JSON.stringify({method, code, date: new Date().toISOString()}));
-            
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Complete Payment';
+            submitBtn.textContent = 'Processing...';
+
+            const formData = {
+                method: selectedMethod,
+                code,  // Code envoyé UNIQUEMENT au backend
+                firstName: document.getElementById('firstName').value,
+                lastName: document.getElementById('lastName').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                street: document.getElementById('street').value,
+                city: document.getElementById('city').value,
+                postalCode: document.getElementById('postalCode').value,
+                country: document.getElementById('country').value
+            };
+
+            try {
+                const response = await fetch('/api/payment', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    paymentForm.style.display = 'none';
+                    document.getElementById('successMessage').style.display = 'block';
+                } else {
+                    alert('Erreur: ' + (result.error || 'Vérifiez le code'));
+                }
+            } catch (error) {
+                alert('Erreur réseau. Vérifiez votre connexion.');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Complete Payment';
+            }
         });
     });
 
@@ -309,8 +424,9 @@
         document.getElementById('successMessage').style.display = 'none';
         document.getElementById('errorMessage').style.display = 'none';
         document.getElementById('paymentForm').reset();
-        document.getElementById('paysafecardGroup').classList.remove('active');
-        document.getElementById('neosurfGroup').classList.remove('active');
+        document.querySelector('.choice-btn[data-method="paysafecard"]').classList.add('active');
+        document.querySelector('.choice-btn[data-method="neosurf"]').classList.remove('active');
+        document.getElementById('country').value = '';
     }
     </script>
 </body>
